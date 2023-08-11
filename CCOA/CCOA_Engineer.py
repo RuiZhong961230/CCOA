@@ -1,7 +1,7 @@
 import os
 from copy import deepcopy
 import numpy as np
-from opfunu.cec_based import cec2020
+from enoppy.paper_based.pdo_2022 import *
 
 
 PopSize = 100
@@ -9,7 +9,7 @@ DimSize = 10
 LB = [-100] * DimSize
 UB = [100] * DimSize
 TrialRuns = 30
-MaxFEs = DimSize * 1000
+MaxFEs = 20000
 MaxIter = int(MaxFEs / PopSize)
 
 curIter = 1
@@ -18,7 +18,7 @@ Pop = np.zeros((PopSize, DimSize))
 FitPop = np.zeros(PopSize)
 
 Func_num = 0
-SuiteName = "CEC2020"
+SuiteName = "Engineer"
 
 
 # initialize the Pop randomly
@@ -106,31 +106,30 @@ def RunCCOA(func):
             curIter += 1
             Best_list.append(min(FitPop))
         All_Trial_Best.append(Best_list)
-    np.savetxt("./CCOA_Data/CEC2020/F" + str(Func_num) + "_" + str(DimSize) + "D.csv", All_Trial_Best, delimiter=",")
+    np.savetxt("./CCOA_Data/Engineer/" + str(Func_num) + ".csv", All_Trial_Best, delimiter=",")
 
 
-def main(dim):
+def main():
     global Func_num, DimSize, Pop, MaxFEs, MaxIter, SuiteName, LB, UB
-    DimSize = dim
-    Pop = np.zeros((PopSize, dim))
-    MaxFEs = dim * 1000
-    MaxIter = int(MaxFEs / PopSize / 2)
-    LB = [-100] * dim
-    UB = [100] * dim
 
-    CEC2020Funcs = [cec2020.F12020(dim), cec2020.F22020(dim), cec2020.F32020(dim), cec2020.F42020(dim),
-                    cec2020.F52020(dim), cec2020.F62020(dim), cec2020.F72020(dim), cec2020.F82020(dim),
-                    cec2020.F92020(dim), cec2020.F102020(dim)]
-    Func_num = 0
-    SuiteName = "CEC2020"
-    for i in range(len(CEC2020Funcs)):
-        Func_num = i + 1
-        RunCCOA(CEC2020Funcs[i])
+    MaxFEs = 20000
+    MaxIter = int(MaxFEs / PopSize / 2)
+
+    Probs = [WBP(), PVP(), CSP(), SRD(), TBTD(), GTD(), CBD(), IBD(), TCD(), PLD(), CBHD(), RCB()]
+    Names = ["WBP", "PVP", "CSP", "SRD", "TBTD", "GTD", "CBD", "IBD", "TCD", "PLD", "CBHD", "RCB"]
+
+    for i in range(len(Probs)):
+        DimSize = Probs[i].n_dims
+        Pop = np.zeros((PopSize, DimSize))
+        LB = Probs[i].lb
+        UB = Probs[i].ub
+
+        Func_num = Names[i]
+        RunCCOA(Probs[i])
 
 
 if __name__ == "__main__":
-    if os.path.exists('./CCOA_Data/CEC2020') == False:
-        os.makedirs('./CCOA_Data/CEC2020')
-    Dims = [10, 30, 50, 100]
-    for Dim in Dims:
-        main(Dim)
+    if os.path.exists('./CCOA_Data/Engineer') == False:
+        os.makedirs('./CCOA_Data/Engineer')
+
+    main()
