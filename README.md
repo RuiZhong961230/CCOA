@@ -11,5 +11,5 @@ For BCCOA files, the necessary packages are mafese and sklearn.
   year={2024},  
   publisher={Springer},  
   doi = {},  
-  note = {Accepted}
+  note = {Accepted}  
 }
