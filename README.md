@@ -7,9 +7,9 @@ For BCCOA files, the necessary packages are mafese and sklearn.
   title={Cooperative Coati Optimization Algorithm with Transfer Functions for Feature Selection and Knapsack Problems},  
   author={Zhong, Rui and Zhang, Chao and Yu, Jun},  
   journal={Knowledge and Information Systems},  
-  pages={},  
+  pages={1-42},  
   year={2024},  
   publisher={Springer},  
-  doi = {},  
+  doi = {https://doi.org/10.1007/s10115-024-02179-3 },  
   note = {Accepted}  
 }
