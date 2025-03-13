@@ -17,4 +17,7 @@ Coatis optimization algorithm (COA) has recently emerged as an innovative meta-h
 }
 
 ## Datasets and Libraries
-CEC benchmarks are provided by the opfunu library, engineering problems are provided by the enoppy library, ELM model and datasets in classification are provided by mafese and intelelm libraries.
+CEC benchmarks and Engineering problems are provided by opfunu==1.0.0 and enoppy==0.1.1 libraries, respectively. ELM model and datasets in classification are provided by mafese==0.1.8 and intelelm==1.0.3 libraries.
+
+## Contact
+If you have any questions, please don't hesitate to contact zhongrui[at]iic.hokudai.ac.jp
